@@ -1,0 +1,27 @@
+{
+  "ints": {
+    "TCG_GAME_ID": 0,
+    "WORLD_WIDTH": 800,
+    "WORLD_HEIGHT": 800,
+    "max_touches": 20,
+    "credits_title_offset": 10,
+    "credits_names_offset": 5,
+    "touchpad_radius": 125,
+    "touchpad_knob_radius": 83,
+    "start_btn_x_offset": 10,
+    "start_btn_y_offset": 10,
+    "touch_pad_x": 10,
+    "touch_pad_y": 10,
+    "touch_vibrate_duration": 35,
+    "population_size": 1000,
+    "initial_step": 500
+  },
+  "floats": {
+    "credits_pad": 20.0,
+    "btn_width": 125.5,
+    "mutation_rate": 0.01,
+    "goal_radius": 8,
+    "dot_size": 8,
+    "dot_acc": 800
+  }
+}

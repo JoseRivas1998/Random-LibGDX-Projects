@@ -1,0 +1,9 @@
+{
+  "levels": [
+    {
+      "key": "map_01",
+      "name": "Map 01",
+      "path": "maps/map01.tmx"
+    }
+  ]
+}

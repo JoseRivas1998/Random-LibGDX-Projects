@@ -1,0 +1,16 @@
+{
+  "text_primary": "#FFFFFF",
+  "text_primary_shadow": "#111111",
+  "text_box_bottom_left": "#2D326B",
+  "text_box_bottom_right": "#292A41",
+  "text_box_top_right": "#2D326B",
+  "text_box_top_left": "#7076B0",
+  "grey_btn": "#808080A8",
+  "fire_btn": "#FF0000A8",
+  "jump_btn": "#008000A8",
+  "btn_press_border": "#d2d2d2",
+  "touchpad_bg": "#80808054",
+  "goal": "#FF0000FF",
+  "dot": "#000000FF",
+  "best_dot": "#00FF00FF"
+}

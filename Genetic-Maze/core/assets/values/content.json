@@ -1,0 +1,26 @@
+{
+  "music": [
+  ],
+  "sound": [
+  ],
+  "font": [
+    {
+      "key": "small",
+      "path": "font/consolas.ttf",
+      "size": 16,
+      "fontColor": "text_primary",
+      "shadowColor": "text_primary_shadow",
+      "shadowOffset": 2
+    },
+    {
+      "key": "main",
+      "path": "font/consolas.ttf",
+      "size": 24,
+      "fontColor": "text_primary",
+      "shadowColor": "text_primary_shadow",
+      "shadowOffset": 2
+    }
+  ],
+  "image": [
+  ]
+}
