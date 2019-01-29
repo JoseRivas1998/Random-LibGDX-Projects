@@ -40,6 +40,8 @@ public class Game extends ApplicationAdapter {
 
     private static int screenshotCounter = 0;
 
+    private static final int STEPS_PER_SECOND = 60;
+
     @Override
     public void create() {
         sr = new ShapeRenderer();
@@ -79,7 +81,10 @@ public class Game extends ApplicationAdapter {
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             reset();
         }
-        doAlgorithm();
+        int steps = (int) Math.ceil((float) STEPS_PER_SECOND * Gdx.graphics.getDeltaTime());
+        for (int i = 0; i < steps; i++) {
+            doAlgorithm();
+        }
         drawAll();
         if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
             saveScreenshot();
