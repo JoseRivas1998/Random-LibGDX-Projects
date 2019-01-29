@@ -114,13 +114,12 @@ public class Cell {
 
     public void drawVisited(ShapeRenderer sr, float width, float height) {
         if (this.visited) {
-            sr.setColor(Color.BLACK);
+            sr.setColor(Color.WHITE);
             sr.rect(
                     this.getCol() * width, this.getRow() * height,
                     width, height
             );
         }
-        sr.setColor(Color.WHITE);
     }
 
     public void drawHighlight(ShapeRenderer sr, float width, float height) {
@@ -129,10 +128,10 @@ public class Cell {
                 this.getCol() * width, this.getRow() * height,
                 width, height
         );
-        sr.setColor(Color.WHITE);
     }
 
     public void drawWalls(ShapeRenderer sr, float width, float height) {
+        sr.setColor(Color.BLACK);
         Vector2 bottomLeft = new Vector2(this.getCol() * width, this.getRow() * height);
         Vector2 bottomRight = new Vector2(bottomLeft).add(width, 0);
         Vector2 topLeft = new Vector2(bottomLeft).add(0, height);
