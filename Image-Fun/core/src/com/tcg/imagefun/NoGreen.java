@@ -17,9 +17,9 @@ public class NoGreen extends ImageEffectBase {
 	}
 
 	private void removeGreen() {
-		if(row < this.image.image.length) {
-			for (int col = 0; col < this.image.image[row].length; col++) {
-				this.image.image[row][col].g = 0;
+		if(row < this.image.pixels.length) {
+			for (int col = 0; col < this.image.pixels[row].length; col++) {
+				this.image.pixels[row][col].g = 0;
 			}
 			row++;
 		}

@@ -17,9 +17,9 @@ public class Greyscale extends ImageEffectBase {
     }
 
     private void grayscale() {
-        if (row < this.image.image.length) {
-            for (int col = 0; col < this.image.image[row].length; col++) {
-                MyImage.MyColor color = this.image.image[row][col];
+        if (row < this.image.pixels.length) {
+            for (int col = 0; col < this.image.pixels[row].length; col++) {
+                MyImage.MyColor color = this.image.pixels[row][col];
                 int l = color.mag();
                 color.r = l;
                 color.g = l;

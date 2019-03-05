@@ -10,27 +10,27 @@ import com.badlogic.gdx.utils.Disposable;
 public class MyImage implements Disposable {
 
     private Pixmap pixmap;
-    public MyColor[][] image;
+    public MyColor[][] pixels;
 
     public MyImage(FileHandle file) {
         pixmap = new Pixmap(file);
-        image = new MyColor[pixmap.getHeight()][pixmap.getWidth()];
+        pixels = new MyColor[pixmap.getHeight()][pixmap.getWidth()];
         reset();
     }
 
     public void reset() {
-        for (int row = 0; row < image.length; row++) {
-            for (int col = 0; col < image[row].length; col++) {
-                image[row][col] = new MyColor(pixmap.getPixel(col, row));
+        for (int row = 0; row < pixels.length; row++) {
+            for (int col = 0; col < pixels[row].length; col++) {
+                pixels[row][col] = new MyColor(pixmap.getPixel(col, row));
             }
         }
     }
 
     public void render(ShapeRenderer sr) {
-        for (int row = 0; row < image.length; row++) {
-            for (int col = 0; col < image[row].length; col++) {
-                sr.setColor(image[row][col].toColor());
-                sr.rect(col, image.length - row - 1, 1, 1);
+        for (int row = 0; row < pixels.length; row++) {
+            for (int col = 0; col < pixels[row].length; col++) {
+                sr.setColor(pixels[row][col].toColor());
+                sr.rect(col, pixels.length - row - 1, 1, 1);
             }
         }
     }

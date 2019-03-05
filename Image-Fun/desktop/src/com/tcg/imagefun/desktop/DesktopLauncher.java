@@ -19,7 +19,7 @@ import java.io.IOException;
 public class DesktopLauncher extends Application {
 
     public enum Effects {
-        NoRed, NoGreen, NoBlue, Greyscale
+        NoRed, NoGreen, NoBlue, Greyscale, Mirror
     }
 
     private Stage window;
@@ -60,6 +60,9 @@ public class DesktopLauncher extends Application {
                         break;
                     case Greyscale:
                         new LwjglApplication(new Greyscale(), config);
+                        break;
+                    case Mirror:
+                        new LwjglApplication(new Mirror(), config);
                         break;
                 }
             }
