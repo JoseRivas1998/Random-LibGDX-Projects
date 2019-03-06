@@ -31,8 +31,10 @@ public class DesktopLauncher extends Application {
         SelectionSortSlow(Selection.class),
         HalfMirrorImage(HalfMirror.class),
         Shuffle(Shuffle.class),
-        WholeSelectionSort(FullSelectionSort.class),
+        WholeSelectionSortPixelByPixel(FullSelectionSortPixelByPixel.class),
+        WholeSelectionSortRowByRow(FullSelectionSortRowByRow.class),
         RandomizeSlightly(SlightlyModify.class),
+        QuickSortRow(QuickSortByRow.class),
         ;
         public final Class<? extends ImageEffectBase> baseClass;
 

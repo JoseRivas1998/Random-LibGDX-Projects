@@ -1,6 +1,6 @@
 package com.tcg.imagefun;
 
-public class FullSelectionSort extends ImageEffectBase {
+public class FullSelectionSortPixelByPixel extends ImageEffectBase {
 
     private int row;
     private int col;
