@@ -2,7 +2,10 @@ package com.tcg.imagefun;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.PixmapIO;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -29,7 +32,11 @@ public abstract class ImageEffectBase extends ApplicationAdapter {
         sr.begin(ShapeRenderer.ShapeType.Filled);
         image.render(sr);
         sr.end();
-
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            Pixmap pixmap = this.image.toPixmap();
+            PixmapIO.writePNG(Util.getScreenshotFile("screenshots/screenshot%02d.png"), pixmap);
+            pixmap.dispose();
+        }
         frames++;
         time += Gdx.graphics.getDeltaTime();
         if(time > 1f){

@@ -44,6 +44,17 @@ public class MyImage implements Disposable {
         pixmap.dispose();
     }
 
+    public Pixmap toPixmap() {
+        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        for (int row = 0; row < pixels.length; row++) {
+            for (int col = 0; col < pixels[row].length; col++) {
+                pixmap.setColor(pixels[row][col].toColor());
+                pixmap.drawPixel(col, row);
+            }
+        }
+        return pixmap;
+    }
+
     public class MyColor implements Comparable<MyColor> {
         public int r;
         public int g;

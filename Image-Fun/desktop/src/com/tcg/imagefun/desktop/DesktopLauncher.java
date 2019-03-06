@@ -19,7 +19,7 @@ import java.io.IOException;
 public class DesktopLauncher extends Application {
 
     public enum Effects {
-        RemoveRead(NoRed.class),
+        RemoveRed(NoRed.class),
         RemoveGreen(NoGreen.class),
         RemoveBlue(NoBlue.class),
         GreyscaleImage(Greyscale.class),
@@ -29,7 +29,10 @@ public class DesktopLauncher extends Application {
         SortFastByBlue(JDKSortByBlue.class),
         SortFastByGreen(JDKSortByGreen.class),
         SelectionSortSlow(Selection.class),
-        HalfMirrorImage(HalfMirror.class)
+        HalfMirrorImage(HalfMirror.class),
+        Shuffle(Shuffle.class),
+        WholeSelectionSort(FullSelectionSort.class),
+        RandomizeSlightly(SlightlyModify.class),
         ;
         public final Class<? extends ImageEffectBase> baseClass;
 
