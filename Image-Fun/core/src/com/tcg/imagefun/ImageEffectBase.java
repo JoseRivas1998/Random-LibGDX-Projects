@@ -11,11 +11,15 @@ public abstract class ImageEffectBase extends ApplicationAdapter {
 
     protected MyImage image;
     protected ShapeRenderer sr;
+    private int frames;
+    private float time;
+    private int fps;
 
     @Override
     public void create() {
         sr = new ShapeRenderer();
         image = new MyImage(Gdx.files.absolute(ImageFun.filePath));
+
     }
 
     @Override
@@ -25,6 +29,16 @@ public abstract class ImageEffectBase extends ApplicationAdapter {
         sr.begin(ShapeRenderer.ShapeType.Filled);
         image.render(sr);
         sr.end();
+
+        frames++;
+        time += Gdx.graphics.getDeltaTime();
+        if(time > 1f){
+            fps = frames;
+            frames = 0;
+            time = 0;
+        }
+        Gdx.graphics.setTitle(String.format("%s | %d", ImageFun.title, fps));
+
     }
 
     @Override

@@ -11,9 +11,13 @@ public class MyImage implements Disposable {
 
     private Pixmap pixmap;
     public MyColor[][] pixels;
+    public final int width;
+    public final int height;
 
     public MyImage(FileHandle file) {
         pixmap = new Pixmap(file);
+        width = pixmap.getWidth();
+        height = pixmap.getHeight();
         pixels = new MyColor[pixmap.getHeight()][pixmap.getWidth()];
         reset();
     }

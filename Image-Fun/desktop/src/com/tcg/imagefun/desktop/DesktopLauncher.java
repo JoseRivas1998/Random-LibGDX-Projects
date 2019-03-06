@@ -19,7 +19,23 @@ import java.io.IOException;
 public class DesktopLauncher extends Application {
 
     public enum Effects {
-        NoRed, NoGreen, NoBlue, Greyscale, Mirror
+        RemoveRead(NoRed.class),
+        RemoveGreen(NoGreen.class),
+        RemoveBlue(NoBlue.class),
+        GreyscaleImage(Greyscale.class),
+        MirrorImage(Mirror.class),
+        SortFast(JDKSort.class),
+        SortFastByRed(JDKSortByRed.class),
+        SortFastByBlue(JDKSortByBlue.class),
+        SortFastByGreen(JDKSortByGreen.class),
+        SelectionSortSlow(Selection.class),
+        HalfMirrorImage(HalfMirror.class)
+        ;
+        public final Class<? extends ImageEffectBase> baseClass;
+
+        Effects(Class<? extends ImageEffectBase> baseClass) {
+            this.baseClass = baseClass;
+        }
     }
 
     private Stage window;
@@ -48,22 +64,12 @@ public class DesktopLauncher extends Application {
                 config.height = image.getHeight();
                 config.foregroundFPS = 0;
                 config.title = effectsComboBox.getValue().toString();
-                switch (effectsComboBox.getValue()) {
-                    case NoRed:
-                        new LwjglApplication(new NoRed(), config);
-                        break;
-                    case NoBlue:
-                        new LwjglApplication(new NoBlue(), config);
-                        break;
-                    case NoGreen:
-                        new LwjglApplication(new NoGreen(), config);
-                        break;
-                    case Greyscale:
-                        new LwjglApplication(new Greyscale(), config);
-                        break;
-                    case Mirror:
-                        new LwjglApplication(new Mirror(), config);
-                        break;
+                ImageFun.title = effectsComboBox.getValue().toString();
+                try {
+                    ImageEffectBase game = effectsComboBox.getValue().baseClass.newInstance();
+                    new LwjglApplication(game, config);
+                } catch (InstantiationException | IllegalAccessException e) {
+                    e.printStackTrace();
                 }
             }
         }
