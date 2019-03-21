@@ -37,8 +37,6 @@ public class Game extends ApplicationAdapter {
     private final float MIN_LENGTH = 1f;
 
     public final TreeParam[] initialParams = {
-            new TreeParam(new Vector2(VIEWPORT_WIDTH * .5f, 0), INITIAL_ANGLE + DELTA_ANGLE, INITIAL_LENGTH),
-            new TreeParam(new Vector2(VIEWPORT_WIDTH * .5f, 0), INITIAL_ANGLE - DELTA_ANGLE, INITIAL_LENGTH),
             new TreeParam(new Vector2(VIEWPORT_WIDTH * .5f, 0), INITIAL_ANGLE, INITIAL_LENGTH),
     };
 
@@ -67,8 +65,11 @@ public class Game extends ApplicationAdapter {
             LineSegment lineSegment = tree.get(i);
 //            Color color = new Color(0xD2FFD2FF).lerp(new Color(0xD2D2FFFF), (float) i / tree.size());
 //            sr.setColor(color);
+            if(lineSegment.getLength() < 5f) {
+                sr.setColor(Color.LIME);
+            }
             lineSegment.draw(sr);
-            sr.setColor(Color.WHITE);
+            sr.setColor(Color.BROWN);
         }
         sr.end();
     }
