@@ -60,7 +60,7 @@ public class ComplexNumber implements Comparable<ComplexNumber> {
     }
 
     public float arg() {
-        return (float) Math.atan(Math.abs(this.complex) / Math.abs(this.real));
+        return (float) Math.atan2(this.complex, this.real);
     }
 
     public ComplexNumber copy() {
@@ -93,17 +93,17 @@ public class ComplexNumber implements Comparable<ComplexNumber> {
         return new ComplexNumber(newReal, newComplex);
     }
 
-    public ComplexNumber mult(float real) {
+    public ComplexNumber scale(float real) {
         return new ComplexNumber(this.real * real, this.complex * real);
     }
 
     public ComplexNumber divide(ComplexNumber complexNumber) {
         ComplexNumber num = this.mult(complexNumber.conjugate());
         ComplexNumber denom = complexNumber.mult(complexNumber.conjugate());
-        return num.divide(denom.abs());
+        return num.div(denom.abs());
     }
 
-    public ComplexNumber divide(float real) {
+    public ComplexNumber div(float real) {
         return new ComplexNumber(this.real / real, this.complex / real);
     }
 
@@ -115,6 +115,39 @@ public class ComplexNumber implements Comparable<ComplexNumber> {
 
     public ComplexNumber root(float root) {
         return this.pow(1f / root);
+    }
+
+    public ComplexNumber exp() {
+        return new ComplexNumber(
+                (float) (Math.exp(this.real) * Math.cos(this.complex)),
+                (float) (Math.exp(this.real) * Math.sin(this.complex))
+        );
+    }
+
+    public ComplexNumber sin() {
+        return new ComplexNumber(
+                (float) (Math.sin(this.real) * Math.cosh(this.complex)),
+                (float) (Math.cos(this.real) * Math.sinh(this.complex))
+        );
+    }
+
+    public ComplexNumber cos() {
+        return new ComplexNumber(
+                (float) (Math.cos(this.real) * Math.cosh(this.complex)),
+                (float) (-Math.sin(this.real) * Math.sinh(this.complex))
+        );
+    }
+
+    public ComplexNumber tan() {
+        return sin().divide(cos());
+    }
+
+    public float getReal() {
+        return real;
+    }
+
+    public float getComplex() {
+        return complex;
     }
 
     @Override
