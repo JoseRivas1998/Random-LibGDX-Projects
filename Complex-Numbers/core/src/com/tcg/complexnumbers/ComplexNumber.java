@@ -35,9 +35,11 @@ public class ComplexNumber implements Comparable<ComplexNumber> {
         return new ComplexNumber(complexNumber);
     }
 
-    public static ComplexNumber of(float a, boolean isReal) {
-        return new ComplexNumber(a, isReal);
+    public static ComplexNumber ofReal(float a) {
+        return new ComplexNumber(a, 0);
     }
+
+    public static ComplexNumber ofComplex(float a) { return new ComplexNumber(0, a); }
 
     public static ComplexNumber fromPolar(float abs, float arg) {
         return new ComplexNumber((float) (abs * Math.cos(arg)), (float) (abs * Math.sin(arg)));

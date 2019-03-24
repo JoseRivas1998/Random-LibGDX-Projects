@@ -45,7 +45,7 @@ public class Game extends ApplicationAdapter {
     public static int mand(ComplexNumber z0, int max) {
         ComplexNumber z = ComplexNumber.of(z0);
         for (int i = 0; i < max; i++) {
-            if (z.abs() > 2.0) {
+            if (z.abs() > 16.0) {
                 return i;
             }
             z = z.mult(z).add(z0);
