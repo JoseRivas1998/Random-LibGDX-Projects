@@ -35,6 +35,7 @@ public class DesktopLauncher extends Application {
         WholeSelectionSortRowByRow(FullSelectionSortRowByRow.class),
         RandomizeSlightly(SlightlyModify.class),
         QuickSortRow(QuickSortByRow.class),
+        EdgeDetection(Edge.class),
         ;
         public final Class<? extends ImageEffectBase> baseClass;
 
@@ -68,6 +69,7 @@ public class DesktopLauncher extends Application {
                 config.width = image.getWidth();
                 config.height = image.getHeight();
                 config.foregroundFPS = 0;
+                config.vSyncEnabled = false;
                 config.title = effectsComboBox.getValue().toString();
                 ImageFun.title = effectsComboBox.getValue().toString();
                 try {

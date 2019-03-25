@@ -127,6 +127,10 @@ public class MyImage implements Disposable {
             return (int) Math.sqrt(magSq());
         }
 
+        public double avg() {
+            return (this.r + this.g + this.b) / 3.0;
+        }
+
         @Override
         public int compareTo(MyColor o) {
             return this.magSq() - o.magSq();
