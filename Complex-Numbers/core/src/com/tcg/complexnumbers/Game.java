@@ -2,6 +2,7 @@ package com.tcg.complexnumbers;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -34,8 +35,8 @@ public class Game extends ApplicationAdapter {
 
     private ShapeRenderer sr;
 
-    private final int WIDTH = 800;
-    private final int HEIGHT = 800;
+    private final int WIDTH = 1000;
+    private final int HEIGHT = 1000;
 
     private Viewport viewport;
 
@@ -55,26 +56,43 @@ public class Game extends ApplicationAdapter {
             0x00_FF_FF_FF
     };
 
-    int max = 2;
+    private int max = 2;
 
-    float angle = 0;
+    private String imagePath;
+    private int[][] colorMatrix;
+
+    public Game(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
     @Override
     public void create() {
-        viewport = new StretchViewport(WIDTH, HEIGHT);
+        generateColorMatrix();
+        viewport = new StretchViewport(colorMatrix[0].length, colorMatrix.length);
+        Gdx.graphics.setWindowedMode((int) viewport.getWorldWidth(), (int) viewport.getWorldHeight());
         this.size = 2f;
         sr = new ShapeRenderer();
         size = 4f;
         center = new Vector2(0, 0);
-        angle = 0;
         saveGif = true;
         files = new ArrayList<>();
+    }
+
+    private void generateColorMatrix() {
+        Pixmap pixmap = new Pixmap(Gdx.files.internal(this.imagePath));
+        colorMatrix = new int[pixmap.getHeight()][pixmap.getWidth()];
+        for (int row = 0; row < pixmap.getHeight(); row++) {
+            for (int col = 0; col < pixmap.getWidth(); col++) {
+                colorMatrix[row][col] = pixmap.getPixel(col, pixmap.getHeight() - row);
+            }
+        }
+        pixmap.dispose();
+
     }
 
     @Override
     public void render() {
         final float speed = 1e-2f;
-        angle += MathUtils.degreesToRadians;
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
             center.y += speed * size;
         }
@@ -104,31 +122,29 @@ public class Game extends ApplicationAdapter {
         viewport.apply(true);
         sr.begin(ShapeRenderer.ShapeType.Filled);
         sr.setProjectionMatrix(viewport.getCamera().combined);
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < HEIGHT; j++) {
+        for (int i = 0; i < colorMatrix[0].length; i++) {
+            for (int j = 0; j < colorMatrix.length; j++) {
                 float x0 = map(i, 0, WIDTH, center.x - size / 2, center.x + size / 2);
                 float y0 = map(j, 0, HEIGHT, center.y - size / 2, center.y + size / 2);
                 ComplexNumber z0 = ComplexNumber.of(x0, y0);
-                max = 255;
-                int grey = mand(
-                        z0,
-                        ComplexNumber.ofComplex(angle).exp().scale(0.7885f),
-                        max
-                );
-                Color c = new Color(0, grey / (float) max, 0, 1);
+                int grey = mand(z0, max);
+//                Color c = new Color(0, grey / (float) max, 0, 1);
+//                Color c = new Color(COLORS[grey % COLORS.length]);
+                Color c = new Color(Color.BLACK);
+                c.lerp(new Color(colorMatrix[j][i]), grey / (float) max);
                 sr.setColor(c);
                 sr.rect(i, j, 1, 1);
             }
         }
         sr.end();
-        if (angle < MathUtils.PI2) {
-            takeScreenshot();
-        } else if(saveGif) {
-            System.out.println("Starting");
-            saveGif();
-            System.out.println("done");
-            saveGif = false;
-        }
+//        if (angle < MathUtils.PI2) {
+//            takeScreenshot();
+//        } else if(saveGif) {
+//            System.out.println("Starting");
+//            saveGif();
+//            System.out.println("done");
+//            saveGif = false;
+//        }
         Gdx.graphics.setTitle(String.format("Madlebrot Set: Size: %f, Center: %s, Iterations: %d", size, center, max));
     }
 
@@ -200,7 +216,7 @@ public class Game extends ApplicationAdapter {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
+        viewport.update(width, height, true);
     }
 
     @Override
